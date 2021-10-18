@@ -2,9 +2,13 @@
 import * as React from 'react';
 
 import { usePageEvent } from 'remax/macro';
-import { View, Text, Navigator } from 'remax/one';
+import { View, Navigator } from 'remax/one';
 
 const GAMES = [
+  {
+    id: 'huarongdao',
+    name: '华容道',
+  },
   {
     id: 'air-war',
     name: '飞机大战',
