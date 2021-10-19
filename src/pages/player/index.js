@@ -1,23 +1,28 @@
-import React, { useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useQuery } from 'remax';
 import { View } from 'remax/one';
-
-import Huarongdao from '@/games/huarongdao';
-import AirWar from '@/games/air-war';
+import { getSystemInfo } from 'remax/wechat';
+import { useGame } from '@/games';
 
 export default () => {
   const { id } = useQuery();
 
-  const Game = useMemo(() => {
-    return {
-      huarongdao: Huarongdao,
-      'air-war': AirWar,
-    }[id];
-  }, [id]);
+  const Game = useGame(id);
+
+  const [systemInfo, setSystemInfo] = useState();
+
+  useEffect(async () => {
+    const res = await getSystemInfo();
+    setSystemInfo(res);
+  }, []);
+
+  if (!systemInfo) {
+    return null;
+  }
 
   return (
     <View>
-      <Game />
+      <Game systemInfo={systemInfo} />
     </View>
   )
 }
