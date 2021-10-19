@@ -1,11 +1,22 @@
-import React from 'react';
-import { View } from 'remax/one';
+import React, { useCallback } from 'react';
+import { Stage, Graphics } from '@inlet/react-pixi';
 
 const AirWar = () => {
+
+  const draw = useCallback((g) => {
+    g.lineStyle(2);
+    g.drawRect(50, 50, 100, 100);
+  });
+
   return (
-    <View>
-      air-war
-    </View>
+    <Stage
+      options={{
+        antialias: true,
+        backgroundAlpha: 0,
+      }}
+    >
+      <Graphics draw={draw} />
+    </Stage>
   )
 }
 
