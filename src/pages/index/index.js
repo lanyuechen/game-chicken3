@@ -6,8 +6,6 @@ import { View, Navigator } from 'remax/one';
 
 import GAMES from '@/games';
 
-console.log('====', GAMES)
-
 export default () => {
   usePageEvent('onShow', () => {
     console.log('page onShow');
