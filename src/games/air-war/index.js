@@ -1,12 +1,15 @@
-import React, { useCallback } from 'react';
-import { Stage, Graphics } from '@inlet/react-pixi';
+import React, { useMemo } from 'react';
+import { Stage } from '@inlet/react-pixi';
+import Rectangle from './rectangle';
+
+const ROW = 6;
+const COL = 4;
 
 const AirWar = () => {
 
-  const draw = useCallback((g) => {
-    g.lineStyle(2);
-    g.drawRect(50, 50, 100, 100);
-  });
+  const grids = useMemo(() => {
+    return new Array(ROW).fill(new Array(COL).fill(0));
+  }, []);
 
   return (
     <Stage
@@ -15,7 +18,15 @@ const AirWar = () => {
         backgroundAlpha: 0,
       }}
     >
-      <Graphics draw={draw} />
+      {grids.map((row, i) => row.map((_, j) => (
+        <Rectangle
+          key={i * row.length + j}
+          row={i}
+          col={j}
+          width={50}
+          color={0x000000}
+        />
+      )))}
     </Stage>
   )
 }
